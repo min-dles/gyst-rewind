@@ -7,14 +7,52 @@ import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
+// import ReactPlayer from 'react-player';
+
+import { useRef } from 'react';
+import styles from '../styles/player.module.css'
+import dynamic from 'next/dynamic';
+
+const DynamicReactPlayer = dynamic(() => import('react-player'), {
+  ssr: false,
+});
 
 export default function Index({ posts, globalData }) {
+  const videoPlayerRef = useRef(null);
+  const handleStart = () => {
+    if(!videoPlayerRef.current.seekTo) return;
+    videoPlayerRef.current && videoPlayerRef.current.seekTo(60);
+  };
   return (
     <Layout>
+      <div className={styles.wrapper}>
+        <DynamicReactPlayer
+          ref={videoPlayerRef}
+          playsinline={true}
+          style={{
+            top: 0,
+          }}
+          onStart={handleStart}
+          loop={true}
+          playbackRate={0.5}
+          controls={false}
+          volume={0}
+          muted={true}
+          playing={true}
+          url="https://www.youtube.com/watch?v=or-RNyQblxQ"
+        />
+      </div>
       <SEO title={globalData.name} description={globalData.blogTitle} />
       <Header name={globalData.name} />
       <main className="w-full">
-        <h1 className="text-3xl lg:text-5xl text-center mb-12">
+        <h1
+          className="text-3xl lg:text-5xl text-center mb-12 font-extrabold text-transparent text-8xl bg-clip-text"
+          style={{
+            height: 'fit-content',
+            lineHeight: '1.2',
+            backgroundImage: 'linear-gradient(to right,black, var(--color-gradient-2), var(--color-gradient-1), var(--color-gradient-2), black)',
+          }}
+        >
           {globalData.blogTitle}
         </h1>
         <ul className="w-full">

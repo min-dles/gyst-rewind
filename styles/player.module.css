@@ -1,0 +1,35 @@
+.wrapper {
+    /* position: relative; */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 640px;
+    height: 360px;
+    display: grid;
+    place-items: center;
+    z-index: -10000;
+    /* background-image: linear-gradient(to bottom, #a18cd1 0%, black 100%) */
+}
+
+.wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Transition from a solid color at the top to transparent at the bottom */
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.75));
+    pointer-events: none;  /* Ensure the video controls are still accessible */
+}
+
+.player {
+    position: absolute;
+    z-index: -20000;
+    opacity: 0.12;
+    /* display: none; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
