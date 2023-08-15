@@ -8,7 +8,7 @@ export default function Header({ name }) {
     <header
       className="pt-20 pb-12"
     >
-      <Link href="/">
+      {/* <Link href="/">
         <Image
           style={{
             borderRadius: '50%',
@@ -19,7 +19,7 @@ export default function Header({ name }) {
           height={120}
           alt={`Logo for ${blogTitle}`}
         />
-      </Link>
+      </Link> */}
     </header>
   );
 }
