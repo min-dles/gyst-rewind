@@ -7,8 +7,6 @@ import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
-// import ReactPlayer from 'react-player';
-
 import { useRef } from 'react';
 import styles from '../styles/player.module.css'
 import dynamic from 'next/dynamic';
@@ -19,10 +17,7 @@ const DynamicReactPlayer = dynamic(() => import('react-player'), {
 
 export default function Index({ posts, globalData }) {
   const videoPlayerRef = useRef(null);
-  const handleStart = () => {
-    if(!videoPlayerRef.current.seekTo) return;
-    videoPlayerRef.current && videoPlayerRef.current.seekTo(60);
-  };
+
   return (
     <Layout>
       <div className={styles.wrapper}>
@@ -32,14 +27,13 @@ export default function Index({ posts, globalData }) {
           style={{
             top: 0,
           }}
-          onStart={handleStart}
           loop={true}
           playbackRate={0.5}
           controls={false}
           volume={0}
           muted={true}
           playing={true}
-          url="https://www.youtube.com/watch?v=or-RNyQblxQ"
+          url="https://youtu.be/or-RNyQblxQ"
         />
       </div>
       <SEO title={globalData.name} description={globalData.blogTitle} />
