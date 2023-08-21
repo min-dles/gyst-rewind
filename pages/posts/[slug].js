@@ -70,6 +70,15 @@ export default function PostPage({
               </a>
             </Link>
           )}
+          {/* home navigation being added here:  */}
+          <Link href="/">
+            <a className="py-8 px-10 text-center md:text-left md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col">
+              <p className="uppercase text-gray-500 mb-4 dark:text-white dark:opacity-60">
+                Home
+              </p>
+              <ArrowIcon className="mt-auto mx-auto md:ml-0" />
+            </a>
+          </Link>
           {nextPost && (
             <Link href={`/posts/${nextPost.slug}`}>
               <a className="py-8 px-10 text-center md:text-left md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col">
