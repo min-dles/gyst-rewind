@@ -80,12 +80,7 @@ export default function PostPage({
               </p>
               <Image
                 src={gystLogo}
-                // width={0}
-                // height={40}
                 alt="Gyst Rewind logo"
-                // sizes="(max-width: 200px) 50vw"
-                // quality={100}
-                // className="mt-auto mx-auto md:mc-0"
               />
             </a>
           </Link>
