@@ -5,11 +5,13 @@ import {
   getPreviousPostBySlug,
   postFilePaths,
 } from '../../utils/mdx-utils';
+import gystLogo from '../../public/images/gyst_logo.jpeg';
 
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import Link from 'next/link';
 import ArrowIcon from '../../components/ArrowIcon';
+import Image from 'next/image';
 import CustomLink from '../../components/CustomLink';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -56,7 +58,7 @@ export default function PostPage({
             <MDXRemote {...source} components={components} />
           </article>
         </main>
-        <div className="grid md:grid-cols-2 lg:-mx-24 mt-12">
+        <div className="grid md:grid-cols-3 lg:-mx-24 mt-12">
           {prevPost && (
             <Link href={`/posts/${prevPost.slug}`}>
               <a className="py-8 px-10 text-center md:text-right first:rounded-t-lg md:first:rounded-tr-none md:first:rounded-l-lg last:rounded-r-lg first last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 last:border-t md:border-r-0 md:last:border-r md:last:rounded-r-none flex flex-col">
@@ -70,6 +72,18 @@ export default function PostPage({
               </a>
             </Link>
           )}
+          {/* home navigation being added here:  */}
+          <Link href="/">
+            <a className="py-8 px-10 text-center md:text-center md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col">
+              <p className="uppercase text-gray-500 mb-4 dark:text-white dark:opacity-60">
+                Home
+              </p>
+              <Image
+                src={gystLogo}
+                alt="Gyst Rewind logo"
+              />
+            </a>
+          </Link>
           {nextPost && (
             <Link href={`/posts/${nextPost.slug}`}>
               <a className="py-8 px-10 text-center md:text-left md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col">
