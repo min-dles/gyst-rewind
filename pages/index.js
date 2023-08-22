@@ -21,6 +21,7 @@ export default function Index({ posts, globalData }) {
   return (
     <Layout>
       <div className={styles.wrapper}>
+        <DynamicReactPlayer
           ref={videoPlayerRef}
           playsinline={true}
           style={{
