@@ -20,8 +20,7 @@ export default function Index({ posts, globalData }) {
 
   return (
     <Layout>
-      <div className={`${styles.wrapper} before:bg-white before:bg-white before:backdrop-blur-lg before:dark:bg-black before:dark:bg-opacity-30 before:bg-opacity-10 `}>
-        <DynamicReactPlayer
+      <div className={styles.wrapper}>
           ref={videoPlayerRef}
           playsinline={true}
           style={{
