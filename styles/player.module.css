@@ -20,7 +20,8 @@
     right: 0;
     bottom: 0;
     /* Transition from a solid color at the top to transparent at the bottom */
-background: linear-gradient(to top, rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.75));
+/* background: linear-gradient(to top, rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.75)); */
+    opacity: var(--tw-bg-opacity);
     pointer-events: none;  /* Ensure the video controls are still accessible */
 }
 
