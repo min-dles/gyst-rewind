@@ -1,39 +1,24 @@
 import Link from 'next/link';
 import { getPosts } from '../utils/mdx-utils';
-
+import Image from 'next/image';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout, { GradientBackground } from '../components/Layout';
 import ArrowIcon from '../components/ArrowIcon';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
-import { useRef } from 'react';
 import styles from '../styles/player.module.css'
-import dynamic from 'next/dynamic';
-
-const DynamicReactPlayer = dynamic(() => import('react-player'), {
-  ssr: false,
-});
 
 export default function Index({ posts, globalData }) {
-  const videoPlayerRef = useRef(null);
 
   return (
     <Layout>
       <div className={`${styles.wrapper} before:bg-white before:bg-white before:backdrop-blur-lg before:dark:bg-black before:dark:bg-opacity-30 before:bg-opacity-10 `}>
-        <DynamicReactPlayer
-          ref={videoPlayerRef}
-          playsinline={true}
-          style={{
-            top: 0,
-          }}
-          loop={true}
-          playbackRate={0.5}
-          controls={false}
-          volume={0}
-          muted={true}
-          playing={true}
-          url="https://youtu.be/or-RNyQblxQ"
+        <Image
+          src="/../public/images/gyst_loop.gif"
+          width={500}
+          height={420}
+          alt="Gyst Rewind logo"
         />
       </div>
       <SEO title={globalData.name} description={globalData.blogTitle} />
@@ -43,7 +28,7 @@ export default function Index({ posts, globalData }) {
           className="text-3xl lg:text-5xl text-center mb-12 font-extrabold text-transparent text-8xl bg-clip-text"
           style={{
             height: 'fit-content',
-            lineHeight: '1.2',
+            lineHeight: '1.0',
             backgroundImage: 'linear-gradient(to right,black, var(--color-gradient-2), var(--color-gradient-1), var(--color-gradient-2), black)',
           }}
         >
