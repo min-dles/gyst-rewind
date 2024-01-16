@@ -17,6 +17,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
+import { setHttpAgentOptions } from 'next/dist/server/config';
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -113,11 +114,23 @@ export default function PostPage({
 }
 
 export const getStaticProps = async ({ params }) => {
+  /**
+   * when index page is loaded get all podcast ids then generate slugs
+   */
+  let allEpisodes = []
+  get(`/${process.env.PODCAST_ID}/all`, {
+    authId: process.env.API_KEY
+  }).then((episodes) => {
+    episodes.forEach(episode => {
+      allEpisodes.push(episode)
+    })
+  })
   const globalData = getGlobalData();
   const { mdxSource, data } = await getPostBySlug(params.slug);
   const prevPost = getPreviousPostBySlug(params.slug);
   const nextPost = getNextPostBySlug(params.slug);
 
+  console.log('you are making me pissed', params)
   return {
     props: {
       globalData,
@@ -129,6 +142,10 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
+/**
+ * 
+ * 
+ */
 export const getStaticPaths = async () => {
   const paths = postFilePaths
     // Remove file extensions for page paths
