@@ -8,14 +8,15 @@ import ArrowIcon from '../components/ArrowIcon';
 import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import styles from '../styles/player.module.css'
+import AnimatedLogo from '/public/images/gyst_loop.gif'
 
-export default function Index({ posts, globalData }) {
+export default function Index({ posts, globalData, allEpisodes }) {
 
   return (
     <Layout>
       <div className={`${styles.wrapper} before:bg-white before:backdrop-blur-lg before:dark:bg-black before:dark:bg-opacity-30 before:bg-opacity-10 `}>
         <Image
-          src="/../public/images/gyst_loop.gif"
+          src={AnimatedLogo}
           width={500}
           height={420}
           alt="Gyst Rewind logo"
@@ -34,6 +35,31 @@ export default function Index({ posts, globalData }) {
         >
           {globalData.blogTitle}
         </h1>
+          <div style={{
+            // display: 'none',
+            backgroundColor: 'red',
+            width: '50vw',
+            height: '50vh',
+            overflow: 'auto'
+          }}>
+            <pre>
+              {JSON.stringify(allEpisodes, null, 2)}
+            </pre>
+          </div>
+        <ul>
+         {allEpisodes.map(episode => (
+            <li key={episode.id} className="border-green-300 border-2 my-2">
+              <span className="flex align-middle items-center">
+              <h3 className="bg-red-300">{episode.title}</h3>
+              <Image className="rounded-full" src={episode.artwork_url} alt="logo" width={50} height={50} />
+              </span>
+              <div className="bg-blue-200" dangerouslySetInnerHTML={{__html: episode.description}} />
+              <pre className="overflow-auto">
+                {JSON.stringify(episode, null, 2)}
+              </pre>
+            </li>
+         ))}
+        </ul>
         <ul className="w-full">
           {posts.map((post) => (
             <li
@@ -76,9 +102,17 @@ export default function Index({ posts, globalData }) {
   );
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
+  const items = await fetch(`https://www.buzzsprout.com/api/${process.env.PODCAST_ID}/episodes.json`, {
+    method: 'GET',
+    withCredentials: true,
+    credentials: 'include',
+    headers:{
+      "Authorization": `Token token=${process.env.API_KEY}`}
+  })
+  const res = await items.json()
   const posts = getPosts();
   const globalData = getGlobalData();
 
-  return { props: { posts, globalData } };
+  return { props: { posts, globalData, allEpisodes: res } };
 }
