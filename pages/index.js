@@ -13,7 +13,7 @@ export default function Index({ posts, globalData }) {
 
   return (
     <Layout>
-      <div className={`${styles.wrapper} before:bg-white before:bg-white before:backdrop-blur-lg before:dark:bg-black before:dark:bg-opacity-30 before:bg-opacity-10 `}>
+      <div className={`${styles.wrapper} before:bg-white before:backdrop-blur-lg before:dark:bg-black before:dark:bg-opacity-30 before:bg-opacity-10 `}>
         <Image
           src="/../public/images/gyst_loop.gif"
           width={500}
@@ -25,7 +25,7 @@ export default function Index({ posts, globalData }) {
       <Header name={globalData.name} />
       <main className="w-full">
         <h1
-          className="text-3xl lg:text-5xl text-center mb-12 font-extrabold text-transparent text-8xl bg-clip-text"
+          className="text-3xl lg:text-5xl text-center mb-12 font-extrabold text-transparent bg-clip-text"
           style={{
             height: 'fit-content',
             lineHeight: '1.0',
