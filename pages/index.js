@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { getPosts } from '../utils/mdx-utils';
 import Image from 'next/image';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -10,7 +9,7 @@ import SEO from '../components/SEO';
 import styles from '../styles/player.module.css'
 import AnimatedLogo from '/public/images/gyst_loop.gif'
 
-export default function Index({ posts, globalData, allEpisodes }) {
+export default function Index({ globalData, allEpisodes }) {
 
   return (
     <Layout>
@@ -35,52 +34,39 @@ export default function Index({ posts, globalData, allEpisodes }) {
         >
           {globalData.blogTitle}
         </h1>
-          <div style={{
-            // display: 'none',
-            backgroundColor: 'red',
-            width: '50vw',
-            height: '50vh',
-            overflow: 'auto'
-          }}>
-            <pre>
-              {JSON.stringify(allEpisodes, null, 2)}
-            </pre>
-          </div>
-        <ul>
-         {allEpisodes.map(episode => (
-            <li key={episode.id} className="border-green-300 border-2 my-2">
-              <span className="flex align-middle items-center">
-              <h3 className="bg-red-300">{episode.title}</h3>
-              <Image className="rounded-full" src={episode.artwork_url} alt="logo" width={50} height={50} />
-              </span>
-              <div className="bg-blue-200" dangerouslySetInnerHTML={{__html: episode.description}} />
-              <pre className="overflow-auto">
-                {JSON.stringify(episode, null, 2)}
-              </pre>
-            </li>
-         ))}
-        </ul>
+        <div style={{
+          // display: 'none',
+          backgroundColor: 'red',
+          width: '50vw',
+          height: '50vh',
+          overflow: 'auto'
+        }}>
+          <pre>
+            {JSON.stringify(allEpisodes, null, 2)}
+          </pre>
+        </div>
         <ul className="w-full">
-          {posts.map((post) => (
+          {allEpisodes.map(episode => (
             <li
-              key={post.filePath}
+              key={episode.id}
               className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
             >
               <Link
-                as={`/posts/${post.filePath.replace(/\.mdx?$/, '')}`}
+                as={`/posts/${episode.id}`}
                 href={`/posts/[slug]`}
               >
                 <a className="py-6 lg:py-10 px-6 lg:px-16 block focus:outline-none focus:ring-4">
-                  {post.data.date && (
+                  {episode.published_at && (
                     <p className="uppercase mb-3 font-bold opacity-60">
-                      {post.data.date}
+                      {`${(new Date (episode.published_at)).toLocaleDateString()}`}
                     </p>
                   )}
-                  <h2 className="text-2xl md:text-3xl">{post.data.title}</h2>
-                  {post.data.description && (
-                    <p className="mt-3 text-lg opacity-60">
-                      {post.data.description}
-                    </p>
+                  <h2 className="text-2xl md:text-3xl">{episode.title}</h2>
+                  {episode.description && (
+                    <div
+                      className="mt-3 text-lg opacity-60"
+                      dangerouslySetInnerHTML={{ __html: episode.description.split("<br>")[0] }}
+                    />
                   )}
                   <ArrowIcon className="mt-4" />
                 </a>
@@ -107,12 +93,12 @@ export async function getStaticProps() {
     method: 'GET',
     withCredentials: true,
     credentials: 'include',
-    headers:{
-      "Authorization": `Token token=${process.env.API_KEY}`}
+    headers: {
+      "Authorization": `Token token=${process.env.API_KEY}`
+    }
   })
   const res = await items.json()
-  const posts = getPosts();
   const globalData = getGlobalData();
 
-  return { props: { posts, globalData, allEpisodes: res } };
+  return { props: { globalData, allEpisodes: res } };
 }
