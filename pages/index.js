@@ -34,17 +34,6 @@ export default function Index({ globalData, allEpisodes }) {
         >
           {globalData.blogTitle}
         </h1>
-        <div style={{
-          // display: 'none',
-          backgroundColor: 'red',
-          width: '50vw',
-          height: '50vh',
-          overflow: 'auto'
-        }}>
-          <pre>
-            {JSON.stringify(allEpisodes, null, 2)}
-          </pre>
-        </div>
         <ul className="w-full">
           {allEpisodes.map(episode => (
             <li
