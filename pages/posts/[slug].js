@@ -116,6 +116,17 @@ export default function PostPage({
 }
 
 export const getStaticProps = async ({ params }) => {
+  /**
+   * when index page is loaded get all podcast ids then generate slugs
+   */
+  let allEpisodes = []
+  get(`/${process.env.PODCAST_ID}/all`, {
+    authId: process.env.API_KEY
+  }).then((episodes) => {
+    episodes.forEach(episode => {
+      allEpisodes.push(episode)
+    })
+  })
   const globalData = getGlobalData();
   const items = await fetch(`https://www.buzzsprout.com/api/${process.env.PODCAST_ID}/episodes.json`, {
     method: 'GET',
@@ -132,6 +143,7 @@ export const getStaticProps = async ({ params }) => {
   const previousEpisode = res[currentEpisodeIndex + 1] || null;
   const nextEpisode = res[currentEpisodeIndex - 1] || null;
 
+  console.log('you are making me pissed', params)
   return {
     props: {
       globalData,
@@ -142,6 +154,10 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
+/**
+ * 
+ * 
+ */
 export const getStaticPaths = async () => {
   const items = await fetch(`https://www.buzzsprout.com/api/${process.env.PODCAST_ID}/episodes.json`, {
     method: 'GET',
