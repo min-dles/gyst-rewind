@@ -8,6 +8,7 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import styles from '../styles/player.module.css'
 import AnimatedLogo from '/public/images/gyst_loop.gif'
+import ArticleText from '../components/ArticleText';
 
 export default function Index({ globalData, allEpisodes }) {
 
@@ -35,15 +36,16 @@ export default function Index({ globalData, allEpisodes }) {
           {globalData.blogTitle}
         </h1>
         <ul className="w-full">
+          <ArticleText>
           {allEpisodes.map(episode => (
             <li
-              key={episode.id}
-              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
+            key={episode.id}
+            className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
             >
               <Link
                 as={`/posts/${episode.id}`}
                 href={`/posts/[slug]`}
-              >
+                >
                 <a className="py-6 lg:py-10 px-6 lg:px-16 block focus:outline-none focus:ring-4">
                   {episode.published_at && (
                     <p className="uppercase mb-3 font-bold opacity-60">
@@ -53,15 +55,16 @@ export default function Index({ globalData, allEpisodes }) {
                   <h2 className="text-2xl md:text-3xl">{episode.title}</h2>
                   {episode.description && (
                     <div
-                      className="mt-3 text-lg opacity-60"
-                      dangerouslySetInnerHTML={{ __html: episode.description.split("<br>")[0] }}
+                    className="mt-3 text-lg opacity-60"
+                    dangerouslySetInnerHTML={{ __html: episode.description.split("<br>")[0] }}
                     />
-                  )}
+                    )}
                   <ArrowIcon className="mt-4" />
                 </a>
               </Link>
             </li>
           ))}
+          </ArticleText>
         </ul>
       </main>
       <Footer copyrightText={globalData.footerText} />

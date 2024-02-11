@@ -10,6 +10,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
+import ArticleText from '../../components/ArticleText';
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -46,10 +47,12 @@ export default function PostPage({
         <main>
           <article className="prose dark:prose-dark">
             {currentEpisode.description && (
+            <ArticleText>
               <p
                 className="text-xl mb-4 px-2 [&_p]:break-all [&_p]:text-pretty md:[&_p]:break-keep"
                 dangerouslySetInnerHTML={{ __html: currentEpisode.description }}
               />
+            </ArticleText>
             )}
           </article>
         </main>
