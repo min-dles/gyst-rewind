@@ -39,8 +39,8 @@ export default function Index({ globalData, allEpisodes }) {
           <ArticleText>
           {allEpisodes.map(episode => (
             <li
-            key={episode.id}
-            className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
+              key={episode.id}
+              className="md:first:rounded-t-lg md:last:rounded-b-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-b-0 last:border-b hover:border-b hovered-sibling:border-t-0"
             >
               <Link
                 as={`/posts/${episode.id}`}
@@ -55,10 +55,10 @@ export default function Index({ globalData, allEpisodes }) {
                   <h2 className="text-2xl md:text-3xl">{episode.title}</h2>
                   {episode.description && (
                     <div
-                    className="mt-3 text-lg opacity-60"
-                    dangerouslySetInnerHTML={{ __html: episode.description.split("<br>")[0] }}
+                      className="mt-3 text-lg opacity-60"
+                      dangerouslySetInnerHTML={{ __html: episode.description.split("<br>")[0] }}
                     />
-                    )}
+                  )}
                   <ArrowIcon className="mt-4" />
                 </a>
               </Link>
