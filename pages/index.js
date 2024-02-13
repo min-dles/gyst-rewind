@@ -8,6 +8,7 @@ import { getGlobalData } from '../utils/global-data';
 import SEO from '../components/SEO';
 import styles from '../styles/player.module.css'
 import AnimatedLogo from '/public/images/gyst_loop.gif'
+import ArticleText from '../components/ArticleText';
 
 export default function Index({ globalData, allEpisodes }) {
 
@@ -35,6 +36,7 @@ export default function Index({ globalData, allEpisodes }) {
           {globalData.blogTitle}
         </h1>
         <ul className="w-full">
+          <ArticleText>
           {allEpisodes.map(episode => (
             <li
               key={episode.id}
@@ -43,7 +45,7 @@ export default function Index({ globalData, allEpisodes }) {
               <Link
                 as={`/posts/${episode.id}`}
                 href={`/posts/[slug]`}
-              >
+                >
                 <a className="py-6 lg:py-10 px-6 lg:px-16 block focus:outline-none focus:ring-4">
                   {episode.published_at && (
                     <p className="uppercase mb-3 font-bold opacity-60">
@@ -62,6 +64,7 @@ export default function Index({ globalData, allEpisodes }) {
               </Link>
             </li>
           ))}
+          </ArticleText>
         </ul>
       </main>
       <Footer copyrightText={globalData.footerText} />

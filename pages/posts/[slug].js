@@ -10,6 +10,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout, { GradientBackground } from '../../components/Layout';
 import SEO from '../../components/SEO';
+import ArticleText from '../../components/ArticleText';
 
 // Custom components/renderers to pass to MDX.
 // Since the MDX files aren't loaded by webpack, they have no knowledge of how
@@ -46,10 +47,12 @@ export default function PostPage({
         <main>
           <article className="prose dark:prose-dark">
             {currentEpisode.description && (
+            <ArticleText>
               <p
-                className="text-xl mb-4"
+                className="text-xl mb-4 px-2 [&_p]:break-all [&_p]:text-pretty md:[&_p]:break-keep"
                 dangerouslySetInnerHTML={{ __html: currentEpisode.description }}
               />
+            </ArticleText>
             )}
           </article>
         </main>
@@ -68,19 +71,20 @@ export default function PostPage({
             </Link>
           )}
           <Link href="/">
-            <a className="py-8 px-10 text-center md:text-center md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col">
+            <a className="py-8 px-10 text-center md:text-center md:first:rounded-t-lg last:rounded-b-lg first:rounded-l-lg md:last:rounded-bl-none md:last:rounded-r-lg backdrop-blur-lg bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-10 hover:bg-opacity-20 dark:hover:bg-opacity-50 transition border border-gray-800 dark:border-white border-opacity-10 dark:border-opacity-10 border-t-0 first:border-t first:rounded-t-lg md:border-t border-b-0 last:border-b flex flex-col items-center">
               <p className="uppercase text-gray-500 mb-4 dark:text-white dark:opacity-60">
                 Home
               </p>
-              <Image
-                src={gystLogo}
-                alt="Gyst Rewind logo"
-                sizes="100vw"
-                style={{
-                  width: '50%',
-                  height: 'auto',
-                }}
-              />
+              <div className="w-16 h-16 rounded-full">
+                <Image
+                  src={gystLogo}
+                  alt="Gyst Rewind logo"
+                  className="rounded-full"
+                  width={64}
+                  height={64}
+                  objectFit='contain'
+                />
+              </div>
             </a>
           </Link>
           {nextEpisode && (
@@ -138,6 +142,10 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
+/**
+ * 
+ * 
+ */
 export const getStaticPaths = async () => {
   const items = await fetch(`https://www.buzzsprout.com/api/${process.env.PODCAST_ID}/episodes.json`, {
     method: 'GET',
